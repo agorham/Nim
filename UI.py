@@ -1,8 +1,9 @@
 import curses
 
+stdscr = curses.initscr()
 
-class GameInterface:
-    stdscr = curses.initscr()
-    curses.noecho()
-    curses.cbreak()
+
+#curses.noecho()
+#curses.cbreak()
+
 
