@@ -13,14 +13,26 @@ assignment may, for the purpose of assessing this assignment:
 - service (which may then retain a copy of this assignment on its database for
 - the purpose of future plagiarism checking)
 """
+import UI
 
 
 class Game:
     def __init__(self):
         self.balls = 12
+        self.total_balls = 12
 
     def ball_count(self):
         return self.balls
+
+    def game_state_ascii(self):
+        pool_pile = ''
+        drop_pile = ''
+        for i in range(self.ball_count()):
+            pool_pile = pool_pile + 'O'
+        for i in range(self.total_balls - self.ball_count()):
+            drop_pile = drop_pile + 'O'
+        print(f'Pool Pile: {pool_pile}')
+        print(f'Drop Pile: {drop_pile}')
 
     def ball_drop(self, amt):
         self.balls = self.balls - int(amt)
@@ -33,9 +45,19 @@ class Game:
         if self.ball_count() % 3 == 3:
             self.ball_drop(3)
             print('The CPU has dropped 3 balls')
+            if self.ball_count() == 0:
+                print('The computer has won')
+                UI.end_game()
         elif self.ball_count() % 3 == 2:
             self.ball_drop(2)
             print('The CPU has dropped 2 balls')
+            if self.ball_count() == 0:
+                print('The computer has won')
+                UI.end_game()
         elif self.ball_count() % 3 == 1:
             self.ball_drop(1)
             print('The CPU has dropped 1 ball')
+            if self.ball_count() == 0:
+                print('The computer has won')
+                UI.end_game()
+        UI.human_turn()
