@@ -13,13 +13,13 @@ assignment may, for the purpose of assessing this assignment:
 - service (which may then retain a copy of this assignment on its database for
 - the purpose of future plagiarism checking)
 """
-import UI
+import sys
 
 
 class Game:
     def __init__(self):
-        self.balls = 12
-        self.total_balls = 12
+        self.balls = 24
+        self.total_balls = 24
 
     def ball_count(self):
         return self.balls
@@ -33,31 +33,60 @@ class Game:
             drop_pile = drop_pile + 'O'
         print(f'Pool Pile: {pool_pile}')
         print(f'Drop Pile: {drop_pile}')
+        print('`````````````````````````')
 
     def ball_drop(self, amt):
         self.balls = self.balls - int(amt)
+
+    def human_turn(self):
+        self.game_state_ascii()
+        choice = input('How many balls do you want to drop? (1, 2, or 3)')
+        if choice == '1':
+            self.ball_drop(1)
+            if self.ball_count() == 0:
+                print('Congrats, you win!')
+                sys.exit()
+            self.cpu_turn()
+        elif choice == '2':
+            self.ball_drop(2)
+            if self.ball_count() == 0:
+                print('Congrats, you win!')
+                sys.exit()
+            self.cpu_turn()
+        elif choice == '3':
+            self.ball_drop(3)
+            if self.ball_count() == 0:
+                print('Congrats, you win!')
+                sys.exit()
+            self.cpu_turn()
 
     def cpu_turn(self):
         """
         The behavior of the cpu on its turn in the standard game
         :return: drop correct number of balls and print the action
         """
-        if self.ball_count() % 3 == 3:
+        if self.ball_count() % 4 == 3:
             self.ball_drop(3)
             print('The CPU has dropped 3 balls')
             if self.ball_count() == 0:
                 print('The computer has won')
-                UI.end_game()
-        elif self.ball_count() % 3 == 2:
+                sys.exit()
+            else:
+                self.human_turn()
+        elif self.ball_count() % 4 == 2:
             self.ball_drop(2)
             print('The CPU has dropped 2 balls')
             if self.ball_count() == 0:
                 print('The computer has won')
-                UI.end_game()
-        elif self.ball_count() % 3 == 1:
+                sys.exit()
+            else:
+                self.human_turn()
+        elif self.ball_count() % 4 == 1:
             self.ball_drop(1)
             print('The CPU has dropped 1 ball')
             if self.ball_count() == 0:
                 print('The computer has won')
-                UI.end_game()
-        UI.human_turn()
+                sys.exit()
+            else:
+                self.human_turn()
+

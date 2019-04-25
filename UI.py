@@ -8,33 +8,8 @@ menu = """
 3. Exit
 Choose:
 """
-game_instance = nim.Game()
 
-
-def human_turn():  # TODO
-    game_instance.game_state_ascii()
-    choice = input('How many balls do you want to drop? (1, 2, or 3)')
-
-    if choice == 1:
-        game_instance.ball_drop(1)
-        if game_instance.ball_count() == 0:
-            print('Congrats, you win!')
-            end_game()
-        game_instance.cpu_turn()
-    elif choice == 2:
-        game_instance.ball_drop(2)
-        if game_instance.ball_count() == 0:
-            print('Congrats, you win!')
-            end_game()
-        game_instance.cpu_turn()
-    elif choice == 3:
-        game_instance.ball_drop(3)
-        if game_instance.ball_count() == 0:
-            print('Congrats, you win!')
-            end_game()
-        game_instance.cpu_turn()
-    else:
-        raise ValueError('Not a Valid Choice')
+game_instance = nim.Game()  # Creates a new game instance for play
 
 
 def print_rules():
@@ -52,17 +27,10 @@ def print_rules():
     print(rules)
 
 
-def end_game():
-    """
-    Exits the program.
-    :return: Exit command
-    """
-    sys.exit()
-
-
-menu_dict = {'1': human_turn,
+menu_dict = {'1': game_instance.human_turn(),
              '2': print_rules,
-             '3': end_game}
+             '3': sys.exit()}
+
 
 while True:
     user_choice = input(menu)
