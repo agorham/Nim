@@ -27,9 +27,9 @@ def print_rules():
     print(rules)
 
 
-menu_dict = {'1': game_instance.human_turn(),
+menu_dict = {'1': game_instance.human_turn,
              '2': print_rules,
-             '3': sys.exit()}
+             '3': sys.exit}
 
 
 while True:

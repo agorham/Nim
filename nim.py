@@ -21,6 +21,10 @@ class Game:
         self.balls = 24
         self.total_balls = 24
 
+    def __str__(self):
+        print(f'There are {self.ball_count()} balls in the Pool Pile')
+        print(f'There are {self.total_balls - self.ball_count()} balls in the Drop Pile')
+
     def ball_count(self):
         return self.balls
 
